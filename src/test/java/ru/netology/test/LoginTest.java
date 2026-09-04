@@ -1,6 +1,7 @@
 package ru.netology.test;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import ru.netology.data.DataHelper;
 import ru.netology.pages.DashboardPage;
@@ -15,6 +16,11 @@ public class LoginTest {
     @AfterEach
     void cleanUp() {
         SQLHelper.cleanAuthCodes();
+    }
+
+    @AfterAll
+    static void cleanDatabase() {
+        SQLHelper.cleanDatabase();
     }
 
     @Test

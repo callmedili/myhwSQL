@@ -51,4 +51,17 @@ public class SQLHelper {
             throw new RuntimeException(e);
         }
     }
+
+    public static void cleanDatabase() {
+        var runner = new QueryRunner();
+
+        try (var conn = getConnection()) {
+            runner.update(conn, "DELETE FROM card_transactions;");
+            runner.update(conn, "DELETE FROM auth_codes;");
+            runner.update(conn, "DELETE FROM cards;");
+            runner.update(conn, "DELETE FROM users;");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
