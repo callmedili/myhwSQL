@@ -24,21 +24,11 @@ public class SQLHelper {
         var runner = new QueryRunner();
         var codeSQL = "SELECT code FROM auth_codes ORDER BY created DESC LIMIT 1;";
 
-        for (int i = 0; i < 10; i++) {
-            try (var conn = getConnection()) {
-                String code = runner.query(conn, codeSQL, new ScalarHandler<>());
-
-                if (code != null) {
-                    return code;
-                }
-
-                Thread.sleep(100);
-            } catch (SQLException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        try (var conn = getConnection()) {
+            return runner.query(conn, codeSQL, new ScalarHandler<>());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        throw new RuntimeException("Verification code was not found");
     }
 
     public static void cleanAuthCodes() {

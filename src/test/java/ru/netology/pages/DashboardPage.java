@@ -3,6 +3,7 @@ package ru.netology.pages;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class DashboardPage {
@@ -11,6 +12,7 @@ public class DashboardPage {
             $(".heading");
 
     public void verifyPage() {
-        heading.shouldHave(text("Личный кабинет"));
+        heading.shouldBe(visible)
+                .shouldHave(text("Личный кабинет"));
     }
 }

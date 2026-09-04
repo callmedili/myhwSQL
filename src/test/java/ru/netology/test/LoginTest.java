@@ -35,9 +35,11 @@ public class LoginTest {
                 authInfo.getPassword()
         );
 
+        VerificationPage verificationPage = new VerificationPage();
+        verificationPage.waitForPage();
+
         String verificationCode = SQLHelper.getVerificationCode();
 
-        VerificationPage verificationPage = new VerificationPage();
         verificationPage.verify(verificationCode);
 
         DashboardPage dashboardPage = new DashboardPage();

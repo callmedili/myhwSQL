@@ -2,6 +2,7 @@ package ru.netology.pages;
 
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
 public class VerificationPage {
@@ -11,6 +12,10 @@ public class VerificationPage {
 
     private final SelenideElement verifyButton =
             $("[data-test-id='action-verify']");
+
+    public void waitForPage() {
+        codeField.shouldBe(visible);
+    }
 
     public void verify(String code) {
         codeField.setValue(code);
